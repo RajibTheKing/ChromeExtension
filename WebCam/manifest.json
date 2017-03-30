@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+
+  "name": "Age Monitor",
+  "description": "This extension Monitors how old are you",
+  "version": "1.1",
+
+  "browser_action": {
+    "default_icon": "green-r-hi.png",
+    "default_popup": "Timer.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "http://api.openweathermap.org/*" 
+  ],
+  "chrome_url_overrides": {
+    "newtab" : "webcam.html"
+  },
+  "background": {
+    "scripts" : ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches" : ["http://*/*", "https://*/*"],
+      "js" : ["myScript.js"]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
+
+

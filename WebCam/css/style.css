@@ -1,0 +1,29 @@
+body { }
+
+/* = MAIN WRAPPER
+----------------------------------------------------------------------------------------------------------------------*/
+.main-wrapper 
+{ 
+	width: auto;
+	height: auto;
+	display: block; 
+	margin: 0 auto;
+	padding-top: 30px; 
+	text-align: center;
+}
+
+
+
+.Zebra_DatePicker .dp_daypicker td.myclass {
+}
+.Zebra_DatePicker .dp_daypicker td.myclass_disabled {
+    background: #E8E8E8 url('../images/close.png') no-repeat center center;
+    text-indent: -9999px;
+}
+
+.bootstrap .Zebra_DatePicker .dp_daypicker td.myclass {
+}
+.bootstrap .Zebra_DatePicker .dp_daypicker td.myclass_disabled {
+    background: #FFF url('../images/close.png') no-repeat center center;
+    text-indent: -9999px;
+}
