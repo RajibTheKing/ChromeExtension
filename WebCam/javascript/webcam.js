@@ -1,6 +1,8 @@
 
-var video = document.querySelector("#videoElement");
+var video = document.querySelector("#directData");
+
 var streamGlobal ;
+
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
 if (navigator.getUserMedia) 
@@ -19,6 +21,7 @@ function handleVideo(stream)
 
 }
 
-function videoError(e) {
+function videoError(e) 
+{
 	// do something
 }	
