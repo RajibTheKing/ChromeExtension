@@ -58,17 +58,17 @@ function startTime( )
 	{
 		/* hide the fulltime when the stop watch is running */ 
 		var fulltime = document.getElementById( "fulltime" ); 
-		fulltime.style.display = "none"; 
-		/* hide the start button if the stop watch is running */ 
-		this.style.display = "none"; 
+		fulltime.style.display = "none";
 		/* call the startWatch( ) function to execute the stop watch whenever the startTime( ) is triggered */ 
 		startWatch( ); 
 	} // if () 
 } // startTime() 
 
-/* you need to bind the startTime( ) function to any event type to keep the stop watch alive ! */ 
+/* you need to bind the startTime( ) function to any event type to keep the stop watch alive ! */
+/*
 window.addEventListener( 'load', function ()
 { 
 	var start = document .getElementById("start"); 
 	start.addEventListener( 'click', startTime ); 
 }); // startwatch.js end 
+*/

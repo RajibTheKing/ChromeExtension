@@ -27,18 +27,16 @@ function stopTime()
 		 mins = '0' + minutes + ': '; gethours = '0' + hours + ': '; 
 		 /* display the stopwatch after it's been stopped */ 
 		 var x = document.getElementById ("timer"); 
-		 var stopTime = gethours + mins + secs; x.innerHTML = stopTime; 
-		 /* display all stop watch control buttons */ 
-		 var showStart = document.getElementById ('start'); 
-		 showStart.style.display = "inline-block"; 
-		 var showStop = document.getElementById ("stop"); 
-		 showStop.style.display = "inline-block"; 
+		 var stopTime = gethours + mins + secs; 
+		 x.innerHTML = "Timer: "+ stopTime; 
+
 		 /* clear the stop watch using the setTimeout( ) return value 'clearTime' as ID */ 
 		 clearTimeout( clearTime ); 
 	} // if () 
 } // stopTime() 
 /* you need to call the stopTime( ) function to terminate the stop watch */ 
 
+/*
 window.addEventListener( 'load', function () 
 {
 
@@ -46,4 +44,4 @@ window.addEventListener( 'load', function ()
 	stop.addEventListener( 'click', stopTime ); 
 
 }); // stopwatch.js end 
-
+*/

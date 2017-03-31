@@ -11,9 +11,25 @@ mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 
 var directDataVideo = document.querySelector('video#directData');
 var recordedDataVideo = document.querySelector('video#storedData');
+var statusBar = document.getElementById('status');
 
-
-var constraints = {audio:true, video:true};
+//var constraints = {audio:true, video:true};
+var minW=640;
+var minH=480;
+var maxW=640;
+var maxH=480;
+var constraints= {
+ "audio": true,
+ "video": {
+  "mandatory": {
+   "minWidth": minW,
+   "minHeight": minH,
+   "maxWidth": maxW,
+   "maxHeight": maxH
+  },
+  "optional": []
+ }
+}
 
 navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
 
@@ -36,20 +52,35 @@ function handleSuccess(stream)
 function handleError(error) 
 {
   console.log('TheKing--> Now Error in getUserMedia =  ', error);
+  
+  showStatus("Error In getUserMedia, Message = "+error.name);
+
+
 }
 
 
 function handleSourceOpen(event)
 {
 	console.log('TheKing--> MediaSource is now Open');
-	sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
+	sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp9"');
 }
 
 function handleDataAvailable(event) 
 {
   if (event.data && event.data.size > 0) 
   {
-    recordedBlobs.push(event.data);
+  	/*
+  	
+  	console.log("TheKing--> Got new Data ", event.data.size, event.data);
+  	var dataString = "";
+  	for(var i=0; i<20; i++)
+  	{
+  		dataString += event.data[i];
+  	}
+  	console.log("TheKing--> DataBytes: ", dataString);
+
+  	*/
+  	recordedBlobs.push(event.data);
   }
 }
 
@@ -74,6 +105,10 @@ function toggleRecording()
 		recordButton.textContent = 'Stop Recording';
 		playButton.disabled = true;
 		downloadButton.disabled = true;
+		
+		playButton.style.visibility = 'hidden';
+		downloadButton.style.visibility = 'hidden';
+
 		startRecording();
 	}
 	else
@@ -81,12 +116,19 @@ function toggleRecording()
 		recordButton.textContent = 'Record';
 		playButton.disabled = false;
 		downloadButton.disabled = false;
+
+		playButton.style.visibility = 'visible';
+		downloadButton.style.visibility = 'visible';
+
 		stopRecording();
+
 	}
 }
 
 function startRecording()
 {
+	startTime();
+	showStatus("Recording started.....");
 	recordedBlobs = [];
 	var options = {mimeType: 'video/webm;codecs=vp9'};
 	mediaRecorder = new MediaRecorder(window.stream, options);
@@ -98,6 +140,8 @@ function startRecording()
 
 function stopRecording() 
 {
+	stopTime();
+	showStatus("Stopped Recording.");
 	mediaRecorder.stop();
 	console.log('TheKing--> Recorded Blobs: ', recordedBlobs);
 	recordedDataVideo.controls = true;
@@ -107,12 +151,15 @@ function stopRecording()
 
 function play() 
 {
+	showStatus("Now trying to play Recorded Video");
 	var superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
 	recordedDataVideo.src = window.URL.createObjectURL(superBuffer);
+
 }
 
 function download()
 {
+	showStatus("Downloading Media to local data storage");
 	console.log('TheKing--> Now I am trying to Download Recorded Data');
 	var blob = new Blob(recordedBlobs, {type: 'video/webm'});
 	var url = window.URL.createObjectURL(blob);
@@ -127,4 +174,9 @@ function download()
     	document.body.removeChild(a);
     	window.URL.revokeObjectURL(url);
   	}, 100);
+}
+
+function showStatus(textToShow)
+{
+	statusBar.innerHTML = "Status: " + textToShow;
 }
