@@ -25,9 +25,7 @@
       "matches" : ["http://*/*", "https://*/*"],
       "js" : [
         "myScript.js",
-        "popup.js",
-        "javascript/bootstrap.min.js",
-        "javascript/jquery.min.js"
+        "popup.js"
        ]
     }
   ],
