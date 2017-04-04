@@ -46,7 +46,7 @@ function startWatch( )
 	/* call the setTimeout( ) to keep the stop watch alive ! */ 
 	//clearTime = setTimeout( "startWatch()", 10); 
 	
-	clearTime = setTimeout( function() { startWatch(); }, 12); 
+	clearTime = setTimeout( function() { startWatch(); }, 10); 
 } // startWatch( ) 
 
 
